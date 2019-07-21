@@ -71,7 +71,7 @@ class UI {
       this.itemID++;
       this.itemList.push(expense);
       this.addExpense(expense);
-      // show balance
+      this.showBalance();
     }
   }
   // add expense
@@ -105,7 +105,14 @@ class UI {
   }
   //total expense
   totalExpense() {
-    let total = 400;
+    let total = 0;
+    if (this.itemList.length > 0) {
+      total = this.itemList.reduce(function(previousValue, currentValue) {
+        previousValue += currentValue.amount;
+        return previousValue;
+      }, 0);
+    }
+    this.expenseAmount.textContent = total;
     return total;
   }
 }
